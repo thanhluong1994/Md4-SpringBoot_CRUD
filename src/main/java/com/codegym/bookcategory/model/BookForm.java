@@ -1,48 +1,41 @@
 package com.codegym.bookcategory.model;
 
-import javax.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-@Table(name = "book")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookForm {
     private Long id;
     private String name;
     private int price;
     private String author;
-    private String image;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
+    private MultipartFile image;
 
-    public Book() {
+    public BookForm() {
     }
 
-    public Book(Long id, String name, int price, String author, String image, Category category) {
+    public BookForm(Long id, String name, int price, String author,Category category, MultipartFile image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.author = author;
+        this.category=category;
         this.image = image;
-        this.category = category;
     }
 
-    public Book(String name, int price, String author, String image, Category category) {
+    public BookForm(String name, int price, String author,Category category, MultipartFile image) {
         this.name = name;
         this.price = price;
         this.author = author;
+        this.category=category;
         this.image = image;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public Long getId() {
@@ -77,11 +70,11 @@ public class Book {
         this.author = author;
     }
 
-    public Category getCategory() {
-        return category;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }
